@@ -60,6 +60,7 @@ from .rent import (
     RentCreateUpdateSerializer,
     RentSerializer,
 )
+from .service_unit import ServiceUnitSerializer
 from .tenant import TenantCreateUpdateSerializer, TenantSerializer
 from .utils import (
     InstanceDictPrimaryKeyRelatedField,
@@ -160,6 +161,7 @@ class LeaseSuccinctSerializer(
     municipality = MunicipalitySerializer()
     district = DistrictSerializer()
     identifier = LeaseIdentifierSerializer(read_only=True)
+    service_unit = ServiceUnitSerializer()
 
     class Meta:
         model = Lease
@@ -181,6 +183,7 @@ class LeaseSuccinctSerializer(
             "note",
             "preparer",
             "is_subject_to_vat",
+            "service_unit",
         )
 
 
@@ -275,6 +278,7 @@ class LeaseSerializerBase(
         many=True, required=False, allow_null=True
     )
     invoice_notes = InvoiceNoteSerializer(many=True, required=False, allow_null=True)
+    service_unit = ServiceUnitSerializer(read_only=True)
 
     class Meta:
         model = Lease
